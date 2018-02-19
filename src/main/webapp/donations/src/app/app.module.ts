@@ -4,11 +4,15 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,
