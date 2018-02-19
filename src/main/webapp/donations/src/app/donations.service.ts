@@ -6,7 +6,7 @@ import {Donation} from "./model/Donation";
 @Injectable()
 export class DonationsService {
 
-  private url = 'donations';
+  private url = 'donation/';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

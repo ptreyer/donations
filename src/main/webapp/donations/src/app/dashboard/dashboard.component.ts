@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DonationsService} from "../donations.service";
+import {Donation} from "../model/Donation";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  private donations : Donation[];
+
+  constructor(private service : DonationsService) {
+
+  }
 
   ngOnInit() {
+    this.service.getDonations().subscribe(donations => this.donations = donations);
   }
 
 }
