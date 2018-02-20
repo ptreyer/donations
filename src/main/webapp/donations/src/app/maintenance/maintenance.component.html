@@ -1,0 +1,89 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title style="font-weight: bold">Neue Spende hinzufügen</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="example-container mat-elevation-z8">
+      <div>
+        <form #myForm="ngForm">
+          <div class="example-container" style="padding: 20px 20px 20px 20px;">
+            <mat-form-field>
+              <input name="vorname" [(ngModel)]="newDonation.vorname" matInput placeholder="Vorname" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input name="nachname" [(ngModel)]="newDonation.nachname" matInput placeholder="Nachname" required>
+            </mat-form-field>
+            <mat-form-field>
+              <input name="firma" [(ngModel)]="newDonation.firma" matInput placeholder="Firma">
+            </mat-form-field>
+            <mat-form-field>
+              <input name="betrag" [(ngModel)]="newDonation.betrag" matInput placeholder="Betrag" type="number"
+                     class="example-right-align"
+                     required>
+              <span matSuffix>.00</span>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addDonation(newDonation)">Speichern</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card style="margin-top: 50px;">
+  <mat-card-header>
+    <mat-card-title style="font-weight: bold">Bestehende Spenden</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="example-container mat-elevation-z8" style="padding: 20px 20px 20px 20px;">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+
+      <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vorname">
+          <mat-header-cell *matHeaderCellDef> Vorname</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.vorname}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nachname">
+          <mat-header-cell *matHeaderCellDef> Nachname</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.nachname}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firma">
+          <mat-header-cell *matHeaderCellDef> Firma</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.firma}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="betrag">
+          <mat-header-cell *matHeaderCellDef> Betrag</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.betrag}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bearbeiten">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-button (click)="updateDonation(element)">Bearbeiten</button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="loeschen">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-button (click)="deleteDonation(element)">Entfernen</button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+</mat-card>

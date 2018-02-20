@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {DonationsService} from "../donations.service";
 import {Donation} from "../model/Donation";
+import * as http from "http";
+import {Observable} from "rxjs/Observable";
+import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +13,32 @@ import {Donation} from "../model/Donation";
 export class DashboardComponent implements OnInit {
 
   private donations : Donation[];
+  private spendenbetrag = new Number();
 
   constructor(private service : DonationsService) {
-
+    IntervalObservable.create(10000)
+      .subscribe(() => {
+        this.service.getDonations()
+          .subscribe(result => {
+            this.donations = result;
+          });
+      });
   }
 
   ngOnInit() {
-    this.service.getDonations().subscribe(donations => this.donations = donations);
+    this.getDonations();
+  }
+
+  getDonations(){
+    this.service.getDonations().subscribe(
+      result => {
+        // Handle result
+        console.log(result)
+        this.donations = result;
+      },
+      error => {
+      },
+    );
   }
 
 }
