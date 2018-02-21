@@ -1,0 +1,30 @@
+<div mat-dialog-content>
+
+  <mat-card style="margin: 20px 10px 20px 10px">
+    <mat-card-header>
+      <mat-card-title style="font-weight: bold">Spende bearbeiten</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="example-container mat-elevation-z8">
+        <div>
+          <form #myForm="ngForm">
+            <div class="example-container" style="padding: 20px 20px 20px 20px;">
+              <mat-form-field>
+                <input name="name" [(ngModel)]="data.donation.name" matInput placeholder="Name" required>
+              </mat-form-field>
+              <mat-form-field>
+                <input name="betrag" [(ngModel)]="data.donation.betrag" matInput placeholder="Betrag in €" type="number"
+                       class="example-right-align"
+                       required>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div mat-dialog-actions style="padding-top: 20px">
+        <button mat-button (click)="cancel()">Abbrechen</button>
+        <button mat-raised-button color="primary" (click)="save()">Speichern</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

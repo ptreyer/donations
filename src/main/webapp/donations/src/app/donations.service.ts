@@ -35,7 +35,8 @@ export class DonationsService {
   }
 
   updateDonation(donation: Donation): Observable<any> {
-    return this.http.put(this.url, donation, this.httpOptions);
+    const url = `${this.url}/${donation.id}`;
+    return this.http.put(url, donation, this.httpOptions);
   }
 
   addDonation(donation: Donation): Observable<Donation> {

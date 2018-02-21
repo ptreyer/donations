@@ -60,9 +60,6 @@ public class DonationService {
             throw new Exception("Kein Ergebnis gefunden");
         }
         result.setBetrag(donation.getBetrag());
-        result.setNachname(donation.getNachname());
-        result.setVorname(donation.getVorname());
-        result.setFirma(donation.getFirma());
 
         return donationDAO.save(result);
     }

@@ -23,9 +23,7 @@ public class DonationDO implements Serializable {
     private Integer id;
 
     private double betrag;
-    private String vorname;
-    private String nachname;
-    private String firma;
+    private String name;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,28 +51,12 @@ public class DonationDO implements Serializable {
         this.betrag = betrag;
     }
 
-    public String getVorname() {
-        return vorname;
+    public String getName() {
+        return name;
     }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-
-    public String getNachname() {
-        return nachname;
-    }
-
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
-    }
-
-    public String getFirma() {
-        return firma;
-    }
-
-    public void setFirma(String firma) {
-        this.firma = firma;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCreatedAt() {
