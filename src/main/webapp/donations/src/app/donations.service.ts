@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import {Donation} from "./model/Donation";
+import {ObjectUnsubscribedError} from "rxjs/Rx";
 
 @Injectable()
 export class DonationsService {
@@ -16,6 +17,16 @@ export class DonationsService {
 
   getDonations(): Observable<Donation[]> {
     return this.http.get<Donation[]>(this.url)
+  }
+
+  getDonationLimit(limit: number): Observable<Donation[]> {
+    const url = `${this.url}/all/${limit}`;
+    return this.http.get<Donation[]>(url)
+  }
+
+  getDonationValue(): Observable<Number>{
+    const url = `${this.url}/value`;
+    return this.http.get<Number>(url);
   }
 
   getDonation(id: number): Observable<Donation>  {

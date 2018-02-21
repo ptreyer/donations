@@ -31,7 +31,7 @@ export class MaintenanceComponent implements OnInit {
     this.service.addDonation(this.newDonation).subscribe(
       result => {
         // Handle result
-        console.log(result)
+        this.newDonation = new Donation();
       },
       error => {
 

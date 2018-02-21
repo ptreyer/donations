@@ -25,7 +25,17 @@ public class DonationController {
         return donationService.findAll();
     }
 
-    @GetMapping(value = "/{id]")
+    @GetMapping(value = "/all/{limit}")
+    public List<DonationDO> findAllLimited(@PathVariable(value = "limit") Integer limit) {
+        return donationService.findAllLimited(limit);
+    }
+
+    @GetMapping(value = "/value")
+    public Double getDonationValue() {
+        return donationService.getDonationValue();
+    }
+
+    @GetMapping(value = "/{id}")
     public ResponseEntity<DonationDO> add(@PathVariable(value = "id") Integer id) {
         return ResponseEntity.ok().body(donationService.find(id));
     }

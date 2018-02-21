@@ -1,3 +1,43 @@
-<p>
-  dashboard works!
-</p>
+<mat-sidenav-container class="example-container">
+
+  <mat-sidenav opened mode="side" position="end">
+    <div style="padding-top: 10px">
+      <div *ngFor="let donation of donations" style="padding: 10px 10px 10px 10px">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title style="font-weight: bold">{{donation.vorname}} {{donation.nachname}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+          <span style="float: inherit; margin-left: 150px">
+            Spende:
+
+          <span style="float: right; color: #04B404; font-size: large">
+            {{donation.betrag | number : '1.2-2'}} €
+          </span>
+            </span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-sidenav>
+  <section>
+
+    <mat-toolbar>
+      <span style="padding-left: 20px"
+            class="example-fill-remaining-space">60 Jahre Sportverein Nesselried 1958 e.V.</span>
+    </mat-toolbar>
+
+    <mat-card class="example-card" style="margin: 30px 20px 0 190px; align: center">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Kinderspielplatz</mat-card-title>
+        <mat-card-subtitle>Spendensammlung</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="../../assets/img/spielplatz.jpg" alt="Spielplatz">
+      <mat-card-content>
+        <span style="text-align:center; font-size: large">Aktueller Spendenstand:</span>
+        <p style="text-align:center; color: #04B404; font-size: xx-large">{{donationValue | number : '1.2-2'}} €</p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</mat-sidenav-container>
