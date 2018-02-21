@@ -10,8 +10,8 @@ import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 })
 export class DashboardComponent implements OnInit {
 
-  private donations : Donation[];
-  private donationValue = new Number();
+  donations : Donation[];
+  donationValue = new Number();
 
   constructor(private service : DonationsService) {
     IntervalObservable.create(10000)
