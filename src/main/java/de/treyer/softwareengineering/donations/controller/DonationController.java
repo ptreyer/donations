@@ -25,9 +25,9 @@ public class DonationController {
         return donationService.findAll();
     }
 
-    @GetMapping(value = "/all/{limit}")
-    public List<DonationDO> findAllLimited(@PathVariable(value = "limit") Integer limit) {
-        return donationService.findAllLimited(limit);
+    @GetMapping(value = "/all/{limit}/{reset}")
+    public List<DonationDO> findAllLimited(@PathVariable(value = "limit") Integer limit, @PathVariable(value = "reset") boolean reset) {
+        return donationService.findAllLimited(limit, reset);
     }
 
     @GetMapping(value = "/value")

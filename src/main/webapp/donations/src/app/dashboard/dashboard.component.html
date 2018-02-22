@@ -1,9 +1,10 @@
-<mat-sidenav-container class="example-container">
+<mat-sidenav-container class="example-container container">
 
   <mat-sidenav opened mode="side" position="end">
-    <div style="padding-top: 10px">
+    <div style="padding-top: 10px" class="content">
       <div *ngFor="let donation of donations" style="padding: 10px 10px 10px 10px">
         <mat-card class="example-card">
+
           <mat-card-header>
             <mat-card-title style="font-weight: bold">{{donation.name}}</mat-card-title>
           </mat-card-header>

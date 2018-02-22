@@ -1,7 +1,7 @@
 export class Donation {
   id: number;
   betrag: number;
-  firma: string;
+  name: string;
   createdAt: Date;
   updatedAt: Date;
 }

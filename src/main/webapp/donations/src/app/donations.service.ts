@@ -19,8 +19,8 @@ export class DonationsService {
     return this.http.get<Donation[]>(this.url)
   }
 
-  getDonationLimit(limit: number): Observable<Donation[]> {
-    const url = `${this.url}/all/${limit}`;
+  getDonationLimit(limit: number, reset:boolean): Observable<Donation[]> {
+    const url = `${this.url}/all/${limit}/${reset}`;
     return this.http.get<Donation[]>(url)
   }
 

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DonationsService} from "../donations.service";
 import {Donation} from "../model/Donation";
 import {IntervalObservable} from "rxjs/observable/IntervalObservable";
+
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -10,33 +13,27 @@ import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 })
 export class DashboardComponent implements OnInit {
 
-  donations : Donation[];
+  donations: Donation[] = new Array();
   donationValue = new Number();
 
-  constructor(private service : DonationsService) {
+  constructor(private service: DonationsService) {
     IntervalObservable.create(10000)
       .subscribe(() => {
-        this.service.getDonationLimit(10)
-          .subscribe(result => {
-            this.donations = result;
-          });
+       this.getDonationsLimit(false);
       });
     IntervalObservable.create(10000)
       .subscribe(() => {
-        this.service.getDonationValue()
-          .subscribe(result => {
-            this.donationValue = result;
-          });
+        this.getDonationValue();
       });
   }
 
   ngOnInit() {
-    this.getDonations();
+    this.getDonationsLimit(true);
     this.getDonationValue();
   }
 
-  getDonations(){
-    this.service.getDonationLimit(10).subscribe(
+  getDonationsLimit(reset: boolean) {
+    this.service.getDonationLimit(6, reset).subscribe(
       result => {
         // Handle result
         console.log(result)
@@ -47,7 +44,19 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getDonationValue(){
+  getDonations() {
+    this.service.getDonations().subscribe(
+      result => {
+        // Handle result
+        console.log(result)
+        this.donations = result;
+      },
+      error => {
+      },
+    );
+  }
+
+  getDonationValue() {
     this.service.getDonationValue().subscribe(
       result => {
         // Handle result

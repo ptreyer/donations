@@ -1,5 +1,6 @@
 package de.treyer.softwareengineering.donations.service;
 
+import de.treyer.softwareengineering.donations.DonationsApplication;
 import de.treyer.softwareengineering.donations.dao.DonationDAO;
 import de.treyer.softwareengineering.donations.model.DonationDO;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -24,17 +26,35 @@ public class DonationService {
         return donationDAO.findAll();
     }
 
-    public List<DonationDO> findAllLimited(int limit) {
+    public List<DonationDO> findAllLimited(int limit, boolean reset) {
+        if(reset){
+            DonationsApplication.index = 0;
+        }
+
         List<DonationDO> donations = donationDAO.findAll();
         if (CollectionUtils.isEmpty(donations))
             return null;
+        Collections.sort(donations, Comparator.comparing(DonationDO::getCreatedAt));
 
-        Collections.sort(donations, Comparator.comparing(DonationDO::getCreatedAt).reversed());
+        int oldIndex = DonationsApplication.index;
+        int newIndex = DonationsApplication.index + limit;
 
-
-        if (donations.size() >= limit)
-            return donations.subList(0, limit);
-
+        if (donations.size() >= limit){
+            if(donations.size() < newIndex){
+                List<DonationDO> res = donations.subList(oldIndex, donations.size());
+                DonationsApplication.index = 0;
+                return res;
+            }
+            if(donations.size() > newIndex){
+                DonationsApplication.index = newIndex;
+                return donations.subList(oldIndex, newIndex);
+            }
+            if(donations.size() == newIndex){
+                DonationsApplication.index = 0;
+                return donations;
+            }
+        }
+        DonationsApplication.index = 0;
         return donations;
     }
 
@@ -60,6 +80,7 @@ public class DonationService {
             throw new Exception("Kein Ergebnis gefunden");
         }
         result.setBetrag(donation.getBetrag());
+        result.setName(donation.getName());
 
         return donationDAO.save(result);
     }

@@ -28,3 +28,6 @@ mat-sidenav {
   background-size: cover;
 }
 
+mat-card.example-card.mat.mat-card{
+  max-height: 96px;
+}

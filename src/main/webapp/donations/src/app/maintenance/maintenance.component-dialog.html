@@ -10,7 +10,7 @@
           <form #myForm="ngForm">
             <div class="example-container" style="padding: 20px 20px 20px 20px;">
               <mat-form-field>
-                <input name="name" [(ngModel)]="data.donation.name" matInput placeholder="Name" required>
+                <input name="name" [(ngModel)]="data.donation.name" maxlength="42" matInput placeholder="Name" required type="text">
               </mat-form-field>
               <mat-form-field>
                 <input name="betrag" [(ngModel)]="data.donation.betrag" matInput placeholder="Betrag in €" type="number"
