@@ -27,7 +27,7 @@ public class DonationService {
     }
 
     public List<DonationDO> findAllLimited(int limit, boolean reset) {
-        if(reset){
+        if (reset) {
             DonationsApplication.index = 0;
         }
 
@@ -39,19 +39,20 @@ public class DonationService {
         int oldIndex = DonationsApplication.index;
         int newIndex = DonationsApplication.index + limit;
 
-        if (donations.size() >= limit){
-            if(donations.size() < newIndex){
+        if (donations.size() >= limit) {
+            if (donations.size() < newIndex) {
+                if (newIndex % donations.size() == 0) {
+                    DonationsApplication.index = 0;
+                    newIndex = DonationsApplication.index + limit;
+                    return donations.subList(DonationsApplication.index, newIndex);
+                }
                 List<DonationDO> res = donations.subList(oldIndex, donations.size());
                 DonationsApplication.index = 0;
                 return res;
             }
-            if(donations.size() > newIndex){
+            if (donations.size() >= newIndex) {
                 DonationsApplication.index = newIndex;
                 return donations.subList(oldIndex, newIndex);
-            }
-            if(donations.size() == newIndex){
-                DonationsApplication.index = 0;
-                return donations;
             }
         }
         DonationsApplication.index = 0;
