@@ -41,7 +41,7 @@ public class DonationService {
 
         if (donations.size() >= limit) {
             if (donations.size() < newIndex) {
-                if (newIndex % donations.size() == 0) {
+                if (newIndex % limit == 0 && donations.size() % limit == 0) {
                     DonationsApplication.index = 0;
                     newIndex = DonationsApplication.index + limit;
                     return donations.subList(DonationsApplication.index, newIndex);
